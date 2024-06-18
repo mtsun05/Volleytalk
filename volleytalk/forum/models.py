@@ -11,9 +11,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-
-
-class Ranking(models.Model):
-    team = models.CharField(max_length=200)
-    score = models.CharField(max_length=200)
-    qualified = models.BooleanField(default=False)
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    body = models.CharField(max_length=700, null=True)
+    likes = models.IntegerField(blank=True, default=0)
+    post_date = models.DateTimeField(blank=True, default=timezone.now)

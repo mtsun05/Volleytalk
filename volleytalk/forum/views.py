@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .models import Ranking, Post
+from .models import Post
 from .forms import PostForm
 
 # Create your views here.
@@ -27,21 +27,16 @@ def forum(request):
 
 
 def rankings(request):
-    items = Ranking.objects.all()
-    return render(request, 'rankings.html', {'rankings': items})
+    return render(request, 'rankings.html')
 
 def polls(request):
-    items = Ranking.objects.all()
-    return render(request, 'polls.html', {'polls': items})
+    return render(request, 'polls.html')
 
 def news(request):
-    items = Ranking.objects.all()
-    return render(request, 'news.html', {'news': items})
+    return render(request, 'news.html')
 
 def clubs(request):
-    items = Ranking.objects.all()
-    return render(request, 'clubs.html', {'clubs': items})
+    return render(request, 'clubs.html')
 
 def players(request):
-    items = Ranking.objects.all()
-    return render(request, 'players.html', {'players': items})
+    return render(request, 'players.html')
