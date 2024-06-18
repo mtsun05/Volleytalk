@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 
@@ -16,3 +17,6 @@ class Comment(models.Model):
     body = models.CharField(max_length=700, null=True)
     likes = models.IntegerField(blank=True, default=0)
     post_date = models.DateTimeField(blank=True, default=timezone.now)
+
+    def __str__(self):
+        return self.body

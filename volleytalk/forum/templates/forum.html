@@ -26,13 +26,32 @@
   </form>
 
   {% for post in all_posts %}
-  <div class="card">
+  <div class="card" style="margin: 5px 0;">
     <div class="card-body">
       <h5 class="card-title">{{ post }}</h5>
       <p class="card-subtitle" style="font-size: 12px;">by User</p>
       <p style="font-size: 12px;">{{post.post_date}}</p>
       <p class="card-text">{{ post.body }}</p>
+      <form action="{% url 'forum' %}" method="post">
+        {% csrf_token %}
+        <input class="form-control" type="text" placeholder="Reply:"/> 
+      </form>
+      {% if post.comments.all %}
+      <a data-bs-toggle="collapse" href="#collapse{{ post.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ post.id }}">
+        View replies
+      </a>
+      {% endif %}
+      <div class="collapse" id="collapse{{ post.id }}">
+          <h6>Replies</h6>
+        {% for comment in post.comments.all %}
+        <div class="card card-body" style="margin: 0;">
+          <p class="card-subtitle" style="font-size: 12px;">by User</p>
+          <p style="font-size: 12px;">{{post.post_date}}</p>
+          <p class="card-text">{{ comment.body }}</p>
+        </div>
     </div>
+  </div>
+    {% endfor %}
   </div>
   {% endfor %}
 </div>

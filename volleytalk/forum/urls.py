@@ -9,5 +9,6 @@ urlpatterns = [
     path('news', views.news, name='news'),
     path('players', views.players, name='players'),
     path('clubs', views.clubs, name='clubs'),
-    path('forum', views.forum, name='forum')
+    path('forum', views.post, name='forum'),
+    path('forum', views.comment, name='forum')
 ]
