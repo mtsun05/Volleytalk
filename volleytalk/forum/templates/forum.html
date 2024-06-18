@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} 
+{% block style %} ../static/css/forum.css {% endblock %} {% block content %}
+<div class="container">
+  <form method="post" action='{% url "forum" %}'>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">Title: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        name="title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Body: </label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="5"
+        name="body"
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+
+  {% for post in all_posts %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ post }}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">by User</h6>
+      <h6>{{post.post_date}}</h6>
+      <p class="card-text">{{ post.body }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
