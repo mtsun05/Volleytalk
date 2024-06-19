@@ -3,9 +3,6 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 # Create your views here.
-def login(request):
-    return render(request, 'login.html', {})
-
 def home(request):
     return render(request, 'home.html', {})
 
