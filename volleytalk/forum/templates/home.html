@@ -1,4 +1,57 @@
-{% extends 'base.html' %} {% block title %} Home Page {% endblock %} 
-{% block content %}
-<p>Welcome to Volleytalk!</p>
+{% extends 'base.html' %} {% block title %} Home Page {% endblock %} {% block content %}
+<h1 class="text-center display-1">Welcome to Volleytalk!</h1>
+<h2 class="text-center bold">
+  The best place on the internet for everything men's volleyball.
+</h2>
+<div class="d-flex justify-content-around home-links" style="margin: 40px 0;">
+    <div class="card" style="width: 18rem">
+      <a href="forum">
+        <img src="../static/imgs/forum-icon.png" class="card-img-top" alt="..." />
+      </a>
+      <div class="card-body">
+        <a
+          href="forum"
+          class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        >
+          <h5 class="card-title">Forum</h5>
+        </a>
+        <p class="card-text">
+          Chat with other volleyball fanatics about anything volleyball.
+        </p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem">
+      <a href="rankings">
+        <img src="../static/imgs/ranking-icon.png" class="card-img-top" alt="..." style="padding: 50px;"/>
+      </a>
+      <div class="card-body">
+        <a
+          href="rankings"
+          class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        >
+          <h5 class="card-title">Rankings</h5>
+        </a>
+        <p class="card-text">
+          Check out the latest international rankings, plus olympic qualifications.
+        </p>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem">
+      <a href="news">
+        <img src="../static/imgs/news-icon.jpg" class="card-img-top" alt="..." />
+      </a>
+      <div class="card-body">
+        <a
+          href="news"
+          class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+        >
+          <h5 class="card-title">News</h5>
+        </a>
+        <p class="card-text">
+          Discover the latest transfer news, national team headlines, and roster updates.
+        </p>
+      </div>
+    </div>
+</div>
+
 {% endblock %}
