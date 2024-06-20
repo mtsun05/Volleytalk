@@ -44,7 +44,7 @@
           <h6>Replies</h6>
         {% for comment in post.comments.all %}
         <div class="card card-body" style="margin: 0;">
-          <p class="card-subtitle" style="font-size: 12px;">by User</p>
+          <p class="card-subtitle" style="font-size: 12px;">by </p>
           <p style="font-size: 12px;">{{post.post_date}}</p>
           <p class="card-text">{{ comment.body }}</p>
         </div>

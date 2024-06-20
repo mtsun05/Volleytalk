@@ -11,9 +11,10 @@ def post(request):
     if request.method == 'POST':
         form = PostForm(request.POST or None)
         if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
             form.save()
         return render(request, 'forum.html', {'all_posts': all_posts})
-
     else:
         return render(request, 'forum.html', {'all_posts': all_posts})
 
