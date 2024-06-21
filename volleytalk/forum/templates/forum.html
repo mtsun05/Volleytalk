@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} {% block style %} ../static/css/forum.css {% endblock %} {% block content %}
+{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} 
+{% block style %} ../static/css/forum.css {% endblock %} {% block content %}
 <form method="post" action='{% url "forum" %}'>
   {% csrf_token %}
   <div class="mb-3">
