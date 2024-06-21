@@ -1,56 +1,64 @@
-{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} 
-{% block style %} ../static/css/forum.css {% endblock %} {% block content %}
-  <form method="post" action='{% url "forum" %}'>
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="title" class="form-label">Title: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        name="title"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="body" class="form-label">Body: </label>
-      <textarea
-        class="form-control"
-        id="exampleFormControlTextarea1"
-        rows="5"
-        name="body"
-      ></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Post</button>
-  </form>
+{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} {% block style %} ../static/css/forum.css {% endblock %} {% block content %}
+<form method="post" action='{% url "forum" %}'>
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="title" class="form-label">Title: </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      name="title"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">Body: </label>
+    <textarea
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="5"
+      name="body"
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
 
-  {% for post in all_posts %}
-  <div class="card" style="margin: 5px 0;">
-    <div class="card-body">
-      <h5 class="card-title">{{ post }}</h5>
-      <p class="card-subtitle" style="font-size: 12px;">by User</p>
-      <p style="font-size: 12px;">{{post.post_date}}</p>
-      <p class="card-text">{{ post.body }}</p>
-      <form action="{% url 'forum' %}" method="post">
-        {% csrf_token %}
-        <input class="form-control" type="text" placeholder="Reply:"/> 
-      </form>
-      {% if post.comments.all %}
-      <a data-bs-toggle="collapse" href="#collapse{{ post.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ post.id }}">
-        View replies
-      </a>
-      {% endif %}
-      <div class="collapse" id="collapse{{ post.id }}">
-          <h6>Replies</h6>
-        {% for comment in post.comments.all %}
-        <div class="card card-body" style="margin: 0;">
-          <p class="card-subtitle" style="font-size: 12px;">by </p>
-          <p style="font-size: 12px;">{{post.post_date}}</p>
-          <p class="card-text">{{ comment.body }}</p>
-        </div>
+{% for post in all_posts %}
+<div class="card" style="margin: 5px 0">
+  <div class="card-body">
+    <h5 class="card-title">{{ post }}</h5>
+    <p class="card-subtitle" style="font-size: 12px">by {{ post.author }}</p>
+    <p style="font-size: 12px">{{post.post_date}}</p>
+    <p class="card-text">{{ post.body }}</p>
+    <form method="post" action="{% url 'forum' %}">
+      {% csrf_token %}
+      <div class="d-flex">
+        <input class="form-control" type="text" placeholder="Reply:" />
+        <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </form>
+
+    {% if post.comments.all %}
+    <a
+      data-bs-toggle="collapse"
+      href="#collapse{{ post.id }}"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapse{{ post.id }}"
+    >
+      View replies
+    </a>
+    {% endif %}
+    <div class="collapse" id="collapse{{ post.id }}">
+      <h6>Replies</h6>
+      {% for comment in post.comments.all %}
+      <div class="card card-body" style="margin: 0">
+        <p class="card-subtitle" style="font-size: 12px">by</p>
+        <p style="font-size: 12px">{{post.post_date}}</p>
+        <p class="card-text">{{ comment.body }}</p>
+      </div>
+      {% endfor %}
     </div>
   </div>
-    {% endfor %}
-  </div>
-  {% endfor %}
-{% endblock %}
+</div>
+{% endfor %} {% endblock %}

@@ -1,11 +1,10 @@
-import uuid
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils import timezone
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey(to=User, related_name='author', on_delete=models.CASCADE, default=None)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='author', on_delete=models.CASCADE, default=None)
     title = models.CharField(max_length=150)
     body = models.CharField(max_length=700, null=True)
     likes = models.IntegerField(blank=True, default=0)
