@@ -6,28 +6,47 @@ from .forms import PostForm, CommentForm
 def home(request):
     return render(request, 'home.html', {})
 
-def post(request):
-    all_posts = Post.objects.all
+def forum(request):
+    all_posts = Post.objects.all()
     if request.method == 'POST':
-        form = PostForm(request.POST or None)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            # post.likes.set(None)
             form.save()
         return render(request, 'forum.html', {'all_posts': all_posts})
     else:
         return render(request, 'forum.html', {'all_posts': all_posts})
-
-def comment(request):
-    all_comments = Comment.objects.all
+    
+def post(request, id):
+    post = Post.objects.get(id=id)
     if request.method == 'POST':
-        form = CommentForm(request.POST or None)
+        form = CommentForm(request.POST)
         if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
             form.save()
-        return render(request, 'forum.html', {'all_comments': all_comments})
-
+        return render(request, 'post.html', {'post': post})
     else:
-        return render(request, 'forum.html', {'all_comments': all_comments})
+        return render(request, 'post.html', {'post': post})
+            
+
+# def comment(request):
+#     form = CommentForm()
+#     print(request.post)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST or None)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.author = request.user
+#             comment.post = request.post
+#             form.save()
+#         return render(request, 'forum.html', {'form': form})
+
+#     else:
+#         return render(request, 'home.html')
 
 
 

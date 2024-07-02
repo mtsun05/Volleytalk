@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -9,6 +9,6 @@ urlpatterns = [
     path('news', views.news, name='news'),
     path('players', views.players, name='players'),
     path('clubs', views.clubs, name='clubs'),
-    path('forum', views.post, name='forum'),
-    path('forum', views.comment, name='forum'),
+    path('forum', views.forum, name='forum'),
+    path('post/<int:id>', views.post, name='post')
 ]
