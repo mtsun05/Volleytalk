@@ -1,38 +1,42 @@
-{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %}
-{% block content %}
-<div class="card mt-5 w-75">
+{% extends 'base.html' %} {% block title %} Volleytalk | Forum {% endblock %} {% block content %}
+<div class="card mt-5 w-75 mx-auto">
   <div class="card-body">
     <h5 class="card-title">{{ post }}</h5>
     <p class="card-subtitle" style="font-size: 12px">by {{ post.author }}</p>
     <p style="font-size: 12px">{{ post.post_date }}</p>
     <p class="card-text">{{ post.body }}</p>
-  
-    <form method='post' action='{% url "post" id=post.id %}'>
+    <div class="likes">
+      <img class="like-button" src="../static/imgs/up-arrow.svg" />
+      <img class='like-button' src="../static/imgs/down-arrow.svg"/>{{ post.likes.count }}
+    </div>
+    <form method="post" action='{% url "post" id=post.id %}'>
       {% csrf_token %}
-      <div class="d-flex">
-        <input
-        placeholder="Comment: "
-        class="form-control"
-        id="body"
-        aria-describedby="emailHelp"
-        name="body"
-      />
-      <button class="btn btn-primary">Post</button>
+      <div>
+        <textarea
+          placeholder="Add your comment: "
+          class="form-control mb-3"
+          id="body"
+          aria-describedby="emailHelp"
+          name="body"
+          rows="4"
+        ></textarea>
+        <button class="btn btn-primary px-3">Post</button>
       </div>
     </form>
     {% if post.comments.all %}
-      <div>
-        <h6>Comments</h6>
-        {% for comment in post.comments.all reversed %}
-        <div class="card card-body mb-2" style="margin: 0">
-          <p class="card-subtitle" style="font-size: 12px">
-            by {{ comment.author }}
-          </p>
-          <p style="font-size: 12px">{{comment.post_date}}</p>
-          <p class="card-text">{{ comment.body }}</p>
-        </div>
-        {% endfor %}
+    <div class="mt-2">
+      <p class="fw-medium">Comments</p>
+      {% for comment in post.comments.all reversed %}
+      <div class="card card-body mb-2" style="margin: 0">
+        <p class="card-subtitle" style="font-size: 12px">
+          by {{ comment.author }}
+        </p>
+        <p style="font-size: 12px">{{comment.post_date}}</p>
+        <p class="card-text">{{ comment.body }}</p>
+      </div>
+      {% endfor %}
     </div>
-  {% endif %}
+    {% endif %}
+  </div>
+  {% endblock %}
 </div>
-{% endblock %}

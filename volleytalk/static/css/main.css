@@ -1,0 +1,14 @@
+.navbar {
+  margin: 5px;
+}
+
+.like-button {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}
+
+.likes {
+  border: 1px solid black;
+  border-radius: 20px;
+}

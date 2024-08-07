@@ -1,13 +1,13 @@
 from django.db import models
 from django.conf import settings
-from users.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     body = models.CharField(max_length=700, null=False)
-    # likes = models.ManyToManyField(User, related_name='likes', blank=True, default=0)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
